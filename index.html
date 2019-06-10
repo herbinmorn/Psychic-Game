@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+  <div>
+    <h1 style="font-weight: bold">The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p id="winCount"></p>
+    <p id="loseCount"></p>
+    <p id="guessLeft"></p>
+    <p id="userGuess"></p>
+  </div>
+
+  
+<script type="text/javascript"> 
+
+   var wins = 0;
+   var losses = 0;
+   var guessLeft = 9;
+
+   var winText = document.getElementById("winCount");
+   var lossText = document.getElementById("loseCount");
+   var guessLeftText = document.getElementById("guessLeft");
+   var userGuessText = document.getElementById("userGuess");
+  
+   winText.textContent = "Wins:"+ wins;
+   lossText.textContent = "Losses:" + losses;
+   guessLeftText.textContent = "Guesses Left:" + guessLeft;
+   
+   function randLetter( ) {
+
+      var letters = ("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+
+      var letter = letters[Math.floor(Math.random()*letters.length)];
+
+      return letter;
+     }
+
+    var computerChoice = randLetter();
+    winText.textContent = "Wins:"+ wins;
+    lossText.textContent = "Losses:" + losses;
+    guessLeftText.textContent = "Guesses Left:" + guessLeft;
+
+   document.onkeyup = function(event) {
+       console.log("computer chose" + computerChoice);
+
+       var userGuess = event.key;
+       if (guessLeft === 0){
+           losses++;
+           guessLeft = 9;
+           var computerChoice = randLetter();
+       } else if(userGuess === computerChoice) {
+           wins++;
+           guessLeft = 9;
+           var computerChoice = randomLetter();
+       } else {
+           guessLeft--;
+       }
+     
+
+     winText.textContent = "Wins:"+ wins;
+     lossText.textContent = "Losses:" + losses;
+     guessLeftText.textContent = "Guesses Left:" + guessLeft;
+
+     }
+     
+
+
+    </script>
+    
+</body>
+</html>
