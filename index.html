@@ -15,6 +15,7 @@
     <p id="loseCount"></p>
     <p id="guessLeft"></p>
     <p id="userGuess"></p>
+    <p id="record"></p>
   </div>
 
   
@@ -28,50 +29,76 @@
    var lossText = document.getElementById("loseCount");
    var guessLeftText = document.getElementById("guessLeft");
    var userGuessText = document.getElementById("userGuess");
+   var recordText = document.getElementById("record");
   
    winText.textContent = "Wins:"+ wins;
    lossText.textContent = "Losses:" + losses;
    guessLeftText.textContent = "Guesses Left:" + guessLeft;
+   recordText.textContent = "Your Guesses so far: ";
+   var guess = "";
    
-   function randLetter( ) {
 
-      var letters = ("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+    var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-      var letter = letters[Math.floor(Math.random()*letters.length)];
+    var letter = letters[Math.floor(Math.random()*letters.length)];
 
-      return letter;
-     }
 
-    var computerChoice = randLetter();
-    winText.textContent = "Wins:"+ wins;
+  
+    // var computerChoice = letter;
+    console.log("computer chose " + letter);
+    /*winText.textContent = "Wins:"+ wins;
     lossText.textContent = "Losses:" + losses;
-    guessLeftText.textContent = "Guesses Left:" + guessLeft;
+    guessLeftText.textContent = "Guesses Left:" + guessLeft;*/
 
    document.onkeyup = function(event) {
-       console.log("computer chose" + computerChoice);
-
+       
        var userGuess = event.key;
-       if (guessLeft === 0){
-           losses++;
-           guessLeft = 9;
-           var computerChoice = randLetter();
-       } else if(userGuess === computerChoice) {
-           wins++;
-           guessLeft = 9;
-           var computerChoice = randomLetter();
-       } else {
-           guessLeft--;
+       console.log("user guess: ", userGuess);
+       console.log("computer guess: ",letter);
+       
+       if(guess != "")
+       {
+           guess+=", ";
        }
+       guess+=userGuess;
+
+       //if (guessLeft === 0){
+         //  losses++;
+        
+          // var computerChoice = randLetter();}
+        if(userGuess === letter) {
+           wins++;
+           winText.textContent = "Wins:"+ wins;
+           guessLeft = 9;
+           guessLeftText.textContent = "Guesses Left:" + guessLeft;
+           letter = letters[Math.floor(Math.random()*letters.length)];
+
+           recordText.textContent = "Your Guesses so far: " + guess;
+
+           guess = "";
+           //var computerChoice = randomLetter();
+       } else {
+           guessLeft--; 
+           if(guessLeft == 0){
+            losses++; 
+            guessLeft = 9;
+            lossText.textContent = "Losses:" + losses;
+            guessLeftText.textContent = "Guesses Left:" + guessLeft;
+            letter = letters[Math.floor(Math.random()*letters.length)];
+            guess = "";
+           }else{
+            guessLeftText.textContent = "Guesses Left:" + guessLeft;
+           }
+           recordText.textContent = "Your Guesses so far: " + guess;
+       }
+   }
      
 
      winText.textContent = "Wins:"+ wins;
      lossText.textContent = "Losses:" + losses;
      guessLeftText.textContent = "Guesses Left:" + guessLeft;
-
-     }
      
-
-
+     console.log("computer choice after keyup", letter);
     </script>
     
 </body>
