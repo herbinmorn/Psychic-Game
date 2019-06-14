@@ -44,17 +44,12 @@
 
 
   
-    // var computerChoice = letter;
+    // see the Console for the computerChoice
     console.log("computer chose " + letter);
-    /*winText.textContent = "Wins:"+ wins;
-    lossText.textContent = "Losses:" + losses;
-    guessLeftText.textContent = "Guesses Left:" + guessLeft;*/
 
    document.onkeyup = function(event) {
        
        var userGuess = event.key;
-       console.log("user guess: ", userGuess);
-       console.log("computer guess: ",letter);
        
        if(guess != "")
        {
@@ -62,21 +57,18 @@
        }
        guess+=userGuess;
 
-       //if (guessLeft === 0){
-         //  losses++;
+
         
-          // var computerChoice = randLetter();}
+
         if(userGuess === letter) {
            wins++;
            winText.textContent = "Wins:"+ wins;
            guessLeft = 9;
            guessLeftText.textContent = "Guesses Left:" + guessLeft;
            letter = letters[Math.floor(Math.random()*letters.length)];
-
            recordText.textContent = "Your Guesses so far: " + guess;
-
            guess = "";
-           //var computerChoice = randomLetter();
+           
        } else {
            guessLeft--; 
            if(guessLeft == 0){
@@ -98,7 +90,6 @@
      lossText.textContent = "Losses:" + losses;
      guessLeftText.textContent = "Guesses Left:" + guessLeft;
      
-     console.log("computer choice after keyup", letter);
     </script>
     
 </body>
